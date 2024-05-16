@@ -1,0 +1,33 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "standard": {
+            "format": "[%(levelname)s|%(module)s|L%(lineno)d] %(asctime)s: %(message)s",
+            "datefmt": "%Y-%m-%dT%H:%M:%S%z"
+        },
+        "message_only": {
+            "format": "%(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "formatter": "standard",
+            "stream": "ext://sys.stdout"
+        },
+        "listHandler": {
+            "class": "logger.custom_handler.ListLogHandler",
+            "level": "INFO",
+            "formatter": "message_only"
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console", "listHandler"],
+            "level": "INFO",
+            "propagate": false
+        }
+    }
+}
