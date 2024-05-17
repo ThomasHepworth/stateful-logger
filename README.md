@@ -2,12 +2,6 @@
 
 This is a test repository to demonstrate the use of a custom logging handler in Python. The intended goal is to have a handler that stores our log outputs, which can be written to a file or database in bulk.
 
-## Features
-
-1. **Singleton Handler**: Ensures only one instance of the logging handler exists, which stores all log records.
-2. **Custom Variables**: Allows setting custom variables for each log entry.
-3. **JSON Configuration**: Loads logging configuration from a JSON file.
-
 ## Class Overview
 
 ### [`ListLogHandler`](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/custom_handler.py#L6)
