@@ -7,12 +7,6 @@ if TYPE_CHECKING:
 
 
 class CustomLogger(logging.Logger):
-    # Class-level attributes for environment variables
-    airflow_stage = ""
-    mojap_version = ""
-    dag_timestamp = ""
-    task_timestamp = ""
-    table = ""
 
     def __init__(self, name: str, level: int = logging.NOTSET):
         super().__init__(name, level)
