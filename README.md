@@ -2,6 +2,24 @@
 
 This is a test repository to demonstrate the use of a custom logging handler in Python. The intended goal is to have a handler that stores our log outputs, which can be written to a file or database in bulk.
 
+This sketch includes:
+* A [custom handler](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/custom_handler.py), which tracks all log calls made in the system and writes this to a dictionary, as we are doing currently in [`append_log_data`](https://github.com/moj-analytical-services/airflow-hmcts-sdp-load/blob/main/load/load_logger.py#L120).
+* A [custom logger](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/custom_logger.py) for interfacing with the handler
+* A [setup step](https://github.com/ThomasHepworth/stateful-logger/blob/3b782bd634f81b10ef8c1bbaf5cd64610ec06db1/logger/setup_logger.py#L7) to ensure that our custom logger is set as the main logger to be imported and used and that the custom handler is added to all logging objects (it lives on the root).
+
+Using the above allows us to load our custom handler at startup and track logs wherever a `logger.info` call is made.
+
+Additionally, when a logger is setup using the common `getLogger` pattern, a `CustomLogger` class will be created.
+```py
+import logging
+
+# Logger will be of class <CustomLogger>
+logger = logging.getLogger(__name__)
+
+# This will log to sysout and also be stored in a `log_records` attribute on the custom handler.
+logger.info("My message")
+```
+
 ## Class Overview
 
 ### [`ListLogHandler`](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/custom_handler.py#L6)
