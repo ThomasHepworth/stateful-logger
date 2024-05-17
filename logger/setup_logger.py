@@ -1,6 +1,7 @@
 import logging
 import json
 import pathlib
+from logger.custom_logger import CustomLogger
 
 
 def setup_logging(
@@ -13,6 +14,7 @@ def setup_logging(
     """
     Setup logging configuration from a JSON file and initialize custom handler with given parameters.
     """
+    logging.setLoggerClass(CustomLogger)
     config_file = pathlib.Path("logger/config.json")
     if config_file.exists():
         try:
@@ -48,3 +50,6 @@ def setup_logging(
             format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         )
         logging.warning("Logging configuration file not found. Using default settings.")
+
+    logger = logging.getLogger("pipeline_logger")
+    return logger

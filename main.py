@@ -1,6 +1,4 @@
-import logging
 from logger.setup_logger import setup_logging
-from logger.custom_handler import ListLogHandler
 from test_functions.hello import hello
 from test_functions.world import world
 
@@ -13,10 +11,12 @@ if __name__ == "__main__":
         task_timestamp="2024-01-01T01:00:00Z",
         table="example_table",
     )
-    logger = logging.getLogger(__name__)
 
-    logger.info("Logging is configured and ready to use.")
-    logger.warning("Test")
+    logger.info(
+        "Logging is configured and ready to use.", extra={"event_type": "setup"}
+    )
+    logger.warning("Test", extra={"event_type": "test"})
+    logger.error("Alert!!", extra={"event_type": "Big"})
 
     # Generate some logs from another module/script
     hello()
@@ -25,8 +25,4 @@ if __name__ == "__main__":
     # Get the stored logs -> these should include logs from this script and the imported modules
     print("\nStored logs as a DataFrame:")
     # Print the logs dataframe
-    handler = next(
-        (h for h in logger.parent.handlers if isinstance(h, ListLogHandler)), None
-    )
-    if handler:
-        print(handler.dataframe())
+    print(logger.dataframe())
