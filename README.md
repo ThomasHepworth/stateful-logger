@@ -38,9 +38,11 @@ Crucially, the `CustomLogger` can be set as our main logger with `logging.setLog
 
 ### [`ListLogHandler`](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/custom_handler.py#L6)
 
-`ListLogHandler` is a custom logging handler that extends `logging.Handler`. It ensures that only one instance of the handler is created (Singleton pattern) and stores all log records.
+`ListLogHandler` is a custom logging handler, defining its own `emit` method for when a log is called.
 
 #### Initialisation
+
+The handler is currently added to the root logger in the [`setup_logging`](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/setup_logger.py#L42) function. This uses a [json config](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/config.json) that defines the level it should use, filters and formatters.
 
 The handler can be initialised with custom variables:
 
@@ -50,7 +52,13 @@ The handler can be initialised with custom variables:
 - `task_timestamp`: The timestamp of the task run.
 - `table`: The table name.
 
-These can be set directly in the json configuration file or injected in on read.
+These can be set directly in the json configuration file or [injected in on read](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/setup_logger.py#L32).
+
+### [`CustomLogger`](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/custom_logger.py#L9)
+
+At present, this only serves as a gateway to the `ListLogHandler`, implementing methods for interfacing with this logger.
+
+It gets set as the global default within the [`setup_logging` function](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/setup_logger.py#L17).
 
 ## Example Output
 
