@@ -20,6 +20,20 @@ logger = logging.getLogger(__name__)
 logger.info("My message")
 ```
 
+## Diagrammatic Overview
+
+Visually, the logging setup in this repo looks like so:
+
+<p align="center">
+  <img src="https://github.com/ThomasHepworth/stateful-logger/assets/45356472/d3e45931-7334-4e2c-ad60-c79086f39f10" width="60%" />
+</p>
+
+Here, handlers are attached to the root logger. These get passed to all child loggers (including our custom logger). 
+
+Crucially, the `CustomLogger` can be set as our main logger with `logging.setLoggerClass`. When the `logging` module is called with `getLogger` going forward, the `CustomLogger` will be returned.
+
+<hr>
+
 ## Class Overview
 
 ### [`ListLogHandler`](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/custom_handler.py#L6)
