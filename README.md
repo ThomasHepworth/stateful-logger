@@ -28,7 +28,7 @@ Visually, the logging setup in this repo looks like so:
   <img src="https://github.com/ThomasHepworth/stateful-logger/assets/45356472/d3e45931-7334-4e2c-ad60-c79086f39f10" width="60%" />
 </p>
 
-Here, handlers are attached to the root logger. These get passed to all child loggers (including our custom logger). 
+Here, handlers are attached to the root logger and get inherited by all loggers down the chain (including the custom logger).
 
 Crucially, the `CustomLogger` can be set as our main logger with `logging.setLoggerClass`. When the `logging` module is called with `getLogger` going forward, the `CustomLogger` will be returned.
 
