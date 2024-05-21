@@ -32,6 +32,8 @@ Here, handlers are attached to the root logger (within the setup step) and get i
 
 Crucially, the `CustomLogger` can be set as our main logger with `logging.setLoggerClass`. Following this, all `logging.getLogger` calls will return the `CustomLogger`.
 
+All handlers, filters and formatters are outlined within the [config.json](https://github.com/ThomasHepworth/stateful-logger/blob/master/logger/config.json) file, which is used in conjunctions with logging's [dictConfig](https://docs.python.org/3/library/logging.config.html#logging.config.dictConfig).
+
 <hr>
 
 ## Class Overview
